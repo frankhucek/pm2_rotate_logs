@@ -5,15 +5,15 @@ import sys
 from subprocess import call
 
 user_home_dir = os.path.expanduser("~")
-log_file_location = f"{user_home_dir}/logs"
+log_file_location = user_home_dir + "/logs"
 
 
 def pm2_rotate_logs(process_name):
     try:
         print("rotating log files")
 
-        pm2_log_dir = f"{user_home_dir}/.pm2/logs"
-        new_log_dir = f"{log_file_location}/pm2"
+        pm2_log_dir = user_home_dir+"/.pm2/logs"
+        new_log_dir = log_file_location+"/pm2"
         if not os.path.exists(new_log_dir):
             os.makedirs(new_log_dir)
 
@@ -25,8 +25,7 @@ def pm2_rotate_logs(process_name):
 
         for file in process_name_files:
             new_file_name = file.split(".")[0] + curr_time + timezone + ".txt"
-            copy_file(f"{user_home_dir}/.pm2/logs/{file}", f"{new_log_dir}/{new_file_name}")
-
+            copy_file(user_home_dir+"/.pm2/logs/"+file, new_log_dir+"/"+new_file_name)
         call("pm2 flush")
     except Exception as ex:
         print(f"Error occurred: {ex}")
