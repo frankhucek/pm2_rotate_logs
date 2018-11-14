@@ -28,14 +28,14 @@ def pm2_rotate_logs(process_name):
             copy_file(user_home_dir+"/.pm2/logs/"+file, new_log_dir+"/"+new_file_name)
         call("pm2 flush")
     except Exception as ex:
-        print(f"Error occurred: {ex}")
+        print("Error occurred: " + ex)
 
 
 def copy_file(src, dest):
     try:
         shutil.copyfile(src,dest)
     except Exception as ex:
-        print(f"Error occurred while copying files: {ex}")
+        print("Error occurred while copying files: " + ex)
 
 
 def main():
