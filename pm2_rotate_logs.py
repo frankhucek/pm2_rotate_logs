@@ -26,7 +26,7 @@ def pm2_rotate_logs(process_name):
         for file in process_name_files:
             new_file_name = file.split(".")[0] + curr_time + timezone + ".txt"
             copy_file(user_home_dir+"/.pm2/logs/"+file, new_log_dir+"/"+new_file_name)
-        call("pm2 flush", shell=True)
+        call(("pm2 flush " + process_name), shell=True)
     except Exception as ex:
         print("Error occurred: " + ex)
 
