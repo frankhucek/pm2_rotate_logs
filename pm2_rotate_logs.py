@@ -21,7 +21,7 @@ def pm2_rotate_logs(process_name):
         process_name_files = list(filter(lambda logfile: process_name in logfile, filelist))
 
         timezone, _ = time.tzname
-        curr_time = time.strftime("%m-%d-%Y_%H:%M:%S")
+        curr_time = time.strftime("_%m-%d-%Y_%H:%M:%S")
 
         for file in process_name_files:
             new_file_name = file.split(".")[0] + curr_time + timezone + ".txt"
